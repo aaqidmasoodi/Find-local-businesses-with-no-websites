@@ -301,8 +301,11 @@ async function searchBusinessesCumulative(lat, lng, maxRadius, types) {
 
                   // Only include if within the requested max radius
                   if (distance <= (maxRadius / 1000)) {
-                    // Create Google Business Profile URL
-                    const googleProfileUrl = `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
+                    // Create proper Google Maps URLs that work on both web and mobile
+                    // Web URL - opens in browser
+                    const webUrl = `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
+                    // Mobile app URL - opens in Google Maps app if available
+                    const mobileUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(details.name || place.name || 'Business')}&query_place_id=${place.place_id}`;
                     
                     businesses.push({
                       name: details.name || 'N/A',
@@ -311,7 +314,8 @@ async function searchBusinessesCumulative(lat, lng, maxRadius, types) {
                       category: type,
                       distance: distance,
                       place_id: place.place_id,
-                      google_profile_url: googleProfileUrl
+                      google_profile_url: webUrl,
+                      google_maps_app_url: mobileUrl
                     });
                   }
                 }
@@ -326,8 +330,9 @@ async function searchBusinessesCumulative(lat, lng, maxRadius, types) {
                 );
                 
                 if (distance <= (maxRadius / 1000)) {
-                  // Create Google Business Profile URL
-                  const googleProfileUrl = `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
+                  // Create proper Google Maps URLs that work on both web and mobile
+                  const webUrl = `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
+                  const mobileUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name || 'Business')}&query_place_id=${place.place_id}`;
                   
                   businesses.push({
                     name: place.name || 'N/A',
@@ -336,7 +341,8 @@ async function searchBusinessesCumulative(lat, lng, maxRadius, types) {
                     category: type,
                     distance: distance,
                     place_id: place.place_id,
-                    google_profile_url: googleProfileUrl
+                    google_profile_url: webUrl,
+                    google_maps_app_url: mobileUrl
                   });
                 }
               }
@@ -429,12 +435,12 @@ function renderMobileResults(results) {
     const div = document.createElement('div');
     div.className = 'business-card';
     div.innerHTML = `
-      <strong><a href="${biz.google_profile_url}" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: none;">${biz.name}</a></strong> 
+      <strong><a href="${biz.google_maps_app_url}" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: none;">${biz.name}</a></strong> 
       <span style="color: #666;">(${biz.category})</span><br/>
       <span style="color: #28a745;">${biz.distance.toFixed(2)} km</span> away<br/>
       <span style="color: #007bff;">📞 ${biz.phone}</span><br/>
       <small>📍 ${biz.address}</small><br/>
-      <a href="${biz.google_profile_url}" target="_blank" rel="noopener noreferrer" style="color: #6c757d; font-size: 0.9em;">View on Google Maps</a>
+      <a href="${biz.google_maps_app_url}" target="_blank" rel="noopener noreferrer" style="color: #6c757d; font-size: 0.9em;">View on Google Maps</a>
     `;
     container.appendChild(div);
   });
