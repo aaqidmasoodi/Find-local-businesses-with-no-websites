@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Local Businesses without Website</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Find Local Businesses without Website</h1>
+    </header>
+
+    <div class="layout desktop">
+      <aside class="search-controls">
+        <input id="location" placeholder="Enter city or address" />
+        <input type="hidden" id="api-key" placeholder="Enter Google API Key" />
+        <label>Radius (km): <span id="radius-value">5</span></label>
+        <input type="range" id="radius" min="1" max="10" value="5" />
+        <div class="categories">
+          <label><input type="checkbox" value="restaurant" checked /> Restaurant</label>
+          <label><input type="checkbox" value="store" checked /> Retail Store</label>
+          <label><input type="checkbox" value="salon" checked /> Salon/Barber</label>
+          <label><input type="checkbox" value="dentist" checked /> Dentist</label>
+          <label><input type="checkbox" value="gym" checked /> Gym/Fitness</label>
+          <label><input type="checkbox" value="plumber" /> Plumber</label>
+          <label><input type="checkbox" value="electrician" /> Electrician</label>
+          <label><input type="checkbox" value="locksmith" /> Locksmith</label>
+          <label><input type="checkbox" value="car_repair" /> Auto Repair</label>
+          <label><input type="checkbox" value="lawyer" /> Lawyer</label>
+          <label><input type="checkbox" value="doctor" /> Doctor/Clinic</label>
+          <label><input type="checkbox" value="real_estate_agency" /> Real Estate</label>
+          <label><input type="checkbox" value="accounting" /> Accountant</label>
+          <label><input type="checkbox" value="insurance_agency" /> Insurance</label>
+          <label><input type="checkbox" value="roofing_contractor" /> Roofer</label>
+          <label><input type="checkbox" value="painter" /> Painter</label>
+          <label><input type="checkbox" value="moving_company" /> Movers</label>
+          <label><input type="checkbox" value="cleaning" /> Cleaning Service</label>
+          <label><input type="checkbox" value="florist" /> Florist</label>
+          <label><input type="checkbox" value="bakery" /> Bakery</label>
+        </div>
+        <button id="search-btn">Search Businesses</button>
+      </aside>
+
+      <main>
+        <div class="results-container">
+          <table id="results-table">
+            <thead>
+              <tr>
+                <th data-sort="name">Name</th>
+                <th data-sort="category">Category</th>
+                <th data-sort="distance">Distance (km)</th>
+                <th>Phone</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="empty-state">Enter location and click Search to find businesses</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <div class="layout mobile">
+      <div class="mobile-search-section">
+        <input id="mobile-location" placeholder="Enter city or address" />
+        <label>Radius: <span id="mobile-radius-value">5</span> km</label>
+        <input type="range" id="mobile-radius" min="1" max="10" value="5" />
+        <div class="categories">
+          <label><input type="checkbox" value="restaurant" checked /> Restaurant</label>
+          <label><input type="checkbox" value="store" checked /> Retail Store</label>
+          <label><input type="checkbox" value="salon" checked /> Salon/Barber</label>
+          <label><input type="checkbox" value="dentist" checked /> Dentist</label>
+          <label><input type="checkbox" value="gym" checked /> Gym/Fitness</label>
+          <label><input type="checkbox" value="plumber" /> Plumber</label>
+          <label><input type="checkbox" value="electrician" /> Electrician</label>
+          <label><input type="checkbox" value="locksmith" /> Locksmith</label>
+          <label><input type="checkbox" value="car_repair" /> Auto Repair</label>
+          <label><input type="checkbox" value="lawyer" /> Lawyer</label>
+          <label><input type="checkbox" value="doctor" /> Doctor/Clinic</label>
+          <label><input type="checkbox" value="real_estate_agency" /> Real Estate</label>
+          <label><input type="checkbox" value="accounting" /> Accountant</label>
+          <label><input type="checkbox" value="insurance_agency" /> Insurance</label>
+          <label><input type="checkbox" value="roofing_contractor" /> Roofer</label>
+          <label><input type="checkbox" value="painter" /> Painter</label>
+          <label><input type="checkbox" value="moving_company" /> Movers</label>
+          <label><input type="checkbox" value="cleaning" /> Cleaning Service</label>
+          <label><input type="checkbox" value="florist" /> Florist</label>
+          <label><input type="checkbox" value="bakery" /> Bakery</label>
+        </div>
+        <button id="mobile-search-btn">Search Businesses</button>
+      </div>
+
+      <div class="mobile-results-section">
+        <div class="results-header">
+          <h2>Results</h2>
+          <button id="export-btn" class="export-btn">Export CSV</button>
+        </div>
+        <div id="mobile-results" class="results-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
